@@ -1,7 +1,9 @@
 function reverse(word) {
-    let splitWord = word.split('')
-    splitWord = splitWord.reverse()
-    return splitWord.join('')
+    const splitWord = word
+        .split('')
+        .reverse()
+        .join('')
+    return splitWord
 }
 
 const word = 'hello'
