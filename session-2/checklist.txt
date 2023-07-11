@@ -1,0 +1,65 @@
+import { useState } from "react";
+import "./styles.css";
+
+const ShoppingCart = () => {
+  const ShoppingList = (props) => {
+    if (props.list.length < 1) {
+      return <p>List is empty</p>;
+    }
+
+    return (
+      <div>
+        <ul>
+          {props.list.map((shoppingItem, index) => {
+            const key = `${shoppingItem}--${index}`;
+            return (
+              <li key={key} onClick={() => handleDelete(index)}>
+                {shoppingItem}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  };
+
+  const [shoppingList, setShoppingList] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleAddToArray = () => {
+    setShoppingList([...shoppingList, inputValue]);
+    setInputValue("");
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleDelete = (index) => {
+    const newArray = [...shoppingList];
+    newArray.splice(index, 1);
+    setShoppingList(newArray);
+  };
+
+  return (
+    <div>
+      <input
+        style={{ marginRight: 10 }}
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleAddToArray}>Add to Array</button>
+      <ShoppingList list={shoppingList} />
+    </div>
+  );
+};
+
+export default function App() {
+  return (
+    <div>
+      <ShoppingCart />
+    </div>
+  );
+}
+
