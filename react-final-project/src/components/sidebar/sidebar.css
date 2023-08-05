@@ -1,0 +1,41 @@
+.sidebar-container {
+    position: relative;
+    width: 250px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+.username {
+    width: 150px;
+    position: absolute;
+    margin: 4px auto;
+    font-weight: 600;
+    font-size: 20px;
+    color: #94d4d2;
+    top: 180px;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-align: center;
+}
+
+.username:hover {
+    overflow: visible;
+    white-space: normal;
+    position: absolute;
+    z-index: 1;
+    max-width: 400px;
+  }
