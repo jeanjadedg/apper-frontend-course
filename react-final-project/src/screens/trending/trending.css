@@ -1,15 +1,15 @@
-.library-body{
-    width: 94%;
-    height: 100%;
-    padding: 3%;
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: auto;
-    justify-content: flex-start;
-    gap: 50px;
+.trending-body{
+  width: 94%;
+  height: 100%;
+  padding: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  justify-content: flex-start;
+  gap: 50px;
 }
 
-.playlist-card {
+.trending-playlist-card {
     position: relative;
     width: 15%;
     height: 34%;
@@ -23,16 +23,17 @@
     cursor: pointer;
 }
 
-.playlist-card:hover {
+.trending-playlist-card:hover {
     transform: scale(1.02);
     background: rgb(91, 93, 93);
 }
 
 .playlist-image {
     width: 100%;
+    aspect-ratio: 1;
 }
 
-.playlist-title {
+.trending-playlist-title {
     font-weight: bold;
     font-size: 18 px;
     color: rgba(255, 255, 255, 0.704);
@@ -46,15 +47,14 @@
     -webkit-box-orient: vertical;
 }
 
-.playlist-subtitle {
+.trending-playlist-subtitle {
     font-style: italic;
     color: rgba(255, 255, 255, 0.499);
     margin: 0px;
 }
 
-.playlist-fade {
+.trending-playlist-fade {
     position: absolute;
-    opacity: 0;
     height: 125%;
     width: 100%;
     right: 0;
@@ -63,8 +63,9 @@
     align-items: center;
     justify-content: center;
     transition: 0.3s ease;
+    opacity: 0;
 }
 
-.playlist-card:hover .playlist-fade {
+.trending-playlist-fade:hover {
     opacity: 1;
 }

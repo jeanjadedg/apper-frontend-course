@@ -39,3 +39,26 @@
     z-index: 1;
     max-width: 400px;
   }
+
+  .signout-button {
+    width: 225px;
+    height: 90px;
+    color: #94d4d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 5px auto;
+    transition: 0.2s ease;
+    background-color: rgba(244, 187, 146, 0);
+  }
+  
+  .signout-button.active {
+    background-color: rgb(69, 163, 170);
+    color: #ffff;
+    transform: scale(1.05);
+  }
+  
+  .signout-button:hover {
+    color: #ffff;
+  }

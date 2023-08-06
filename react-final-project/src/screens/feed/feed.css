@@ -1,4 +1,4 @@
-.library-body{
+.feed-body{
     width: 94%;
     height: 100%;
     padding: 3%;
@@ -9,7 +9,7 @@
     gap: 50px;
 }
 
-.playlist-card {
+.feed-album-card {
     position: relative;
     width: 15%;
     height: 34%;
@@ -23,16 +23,16 @@
     cursor: pointer;
 }
 
-.playlist-card:hover {
+.feed-album-card:hover {
     transform: scale(1.02);
     background: rgb(91, 93, 93);
 }
 
-.playlist-image {
+.feed-image {
     width: 100%;
 }
 
-.playlist-title {
+.feed-album-name {
     font-weight: bold;
     font-size: 18 px;
     color: rgba(255, 255, 255, 0.704);
@@ -46,13 +46,13 @@
     -webkit-box-orient: vertical;
 }
 
-.playlist-subtitle {
+.feed-album-subtitle {
     font-style: italic;
     color: rgba(255, 255, 255, 0.499);
     margin: 0px;
 }
 
-.playlist-fade {
+.feed-album-fade {
     position: absolute;
     opacity: 0;
     height: 125%;
@@ -65,6 +65,40 @@
     transition: 0.3s ease;
 }
 
-.playlist-card:hover .playlist-fade {
+.feed-album-card:hover .feed-album-fade {
     opacity: 1;
 }
+
+.input-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  .search-input {
+    width: 90%;
+    height: 40px;
+    padding: 10px 10px 10px 30px;
+    border: none;
+    background-color: rgba(30, 31, 32, 0.748);
+    color: rgba(255, 255, 255, 0.704);
+    font-size: 16px;
+    transition: all 0.2s ease;
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    background-color: rgb(74, 78, 78);
+  }
+  
+  .search-input::placeholder {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.704);
+    font-size: 16px;
+  }

@@ -14,7 +14,6 @@ import { setClientToken } from '../../spotify'
 export default function Home() {
 
   const [token, setToken] = useState("");
-
   useEffect(() => {
       const token = window.localStorage.getItem("token");
       const hash = window.location.hash;
@@ -31,11 +30,17 @@ export default function Home() {
       
   }, []);
 
+  const handleSignout = () => {
+    window.localStorage.removeItem("token");
+    setToken(""); // Clear the token from state
+    setClientToken(""); // Clear the token from the API client
+  };
+
   return !token ? (
       <Login />
     ) : ( <Router>
       <div className='main-body'> 
-        <Sidebar />
+        <Sidebar onSignout={handleSignout} />
         <Routes>
           <Route path="/" element={<Library />}></Route>
           <Route path="/feed" element={<Feed />}></Route>
