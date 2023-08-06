@@ -19,7 +19,8 @@ export default function Trending() {
   const navigate = useNavigate();
 
   const playPlaylist = (id) => {
-    navigate("/player", {state: { id: id }})
+    const playlistType = 'playlist';
+    navigate("/player", { state: { id, type: playlistType } });
   }
 
   return ( 

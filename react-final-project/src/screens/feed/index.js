@@ -57,7 +57,8 @@ function InputWithApiCall() {
   const navigate = useNavigate();
 
   const playPlaylist = (id) => {
-    navigate("/player", { state: { id: id } })
+    const playlistType = 'album';
+    navigate("/player", { state: { id, type: playlistType } });
   }
 
   return (

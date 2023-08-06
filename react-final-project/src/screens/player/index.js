@@ -15,12 +15,23 @@ export default function Player() {
 
   useEffect(() => {
     if (location.state) {
-      apiClient
-        .get("playlists/" + location.state?.id + "/tracks")
-        .then((res) => {
-          setTracks(res.data.items);
-          setCurrentTrack(res.data?.items[0]?.track);
-        });
+      const { id, type } = location.state; // Assuming you pass a 'type' key in location.state to indicate 'playlist' or 'album'
+      
+      if (type === 'playlist') {
+        apiClient
+          .get("playlists/" + id + "/tracks")
+          .then((res) => {
+            setTracks(res.data.items);
+            setCurrentTrack(res.data?.items[0]?.track);
+          });
+      } else if (type === 'album') {
+        apiClient
+          .get("albums/" + id + "/tracks")
+          .then((res) => {
+            setTracks(res.data.items);
+            setCurrentTrack(res.data?.items[0]?.track);
+          });
+      }
     }
   }, [location.state]);
 

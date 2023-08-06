@@ -18,7 +18,8 @@ export default function Library() {
   const navigate = useNavigate();
 
   const playPlaylist = (id) => {
-    navigate("/player", {state: { id: id }})
+    const playlistType = 'playlist'; // Set the type as 'playlist'
+    navigate("/player", { state: { id, type: playlistType } });
   }
 
   return ( 
