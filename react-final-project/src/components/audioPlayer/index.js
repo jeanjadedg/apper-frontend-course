@@ -12,9 +12,9 @@ export default function AudioPLayer({
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
-  var audioSrc = total[currentIndex]?.track.preview_url;
+  var audioSrc = total[currentIndex]?.track?.preview_url;
 
-  const audioRef = useRef(new Audio(total[0]?.track.preview_url));
+  const audioRef = useRef(new Audio(total[0]?.track?.preview_url));
 
   const intervalRef = useRef();
 

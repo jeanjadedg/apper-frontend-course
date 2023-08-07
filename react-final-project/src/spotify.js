@@ -2,7 +2,7 @@ import axios from "axios"
 
 const authEndpoint = "https://accounts.spotify.com/authorize?"
 const clientId= "f0af52bc1f8f4ca9b664ccf36aad68a2"
-const redirectUri = "http://localhost:3000"
+const redirectUri = "https://apper-frontend-course.vercel.app/"
 const scopes = ["user-library-read", "playlist-read-private"]
 
 export const loginEndpoint = `${authEndpoint}client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
