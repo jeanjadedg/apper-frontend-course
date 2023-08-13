@@ -6,6 +6,7 @@ import { FaGripfire, FaPlay } from 'react-icons/fa';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IoLibrary } from 'react-icons/io5';
 import { MdSpaceDashboard } from 'react-icons/md';
+import { CgGym } from "react-icons/cg";
 import apiClient from '../../spotify';
 import { BsSearch } from 'react-icons/bs';
 import { FiTrendingUp } from 'react-icons/fi';
@@ -36,7 +37,7 @@ export default function Sidebar( {onSignout} ) {
         <SidebarButton title='Search' to='/feed' icon={<BsSearch />} />
         <SidebarButton title='Featured' to='/trending' icon={<FiTrendingUp />} />
         <SidebarButton title='Player' to='/player' icon={<FaPlay />} />
-        <SidebarButton title='Favorites' to='/favorites' icon={<MdFavorite />} />
+        <SidebarButton title='Workout' to='/favorites' icon={<CgGym />} />
         <SidebarButton title='Library' to='/' icon={<IoLibrary />} />
       </div>
       <div className='signout-button' onClick={onSignout}>

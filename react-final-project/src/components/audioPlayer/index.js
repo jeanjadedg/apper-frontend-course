@@ -4,7 +4,7 @@ import Controls from "./controls";
 import ProgressCircle from "./progressCircle";
 import WaveAnimation from "./waveAnimation";
 
-export default function AudioPLayer({
+export default function AudioPlayer({
   currentTrack,
   currentIndex,
   setCurrentIndex,
@@ -12,16 +12,13 @@ export default function AudioPLayer({
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
-  var audioSrc = total[currentIndex]?.track?.preview_url;
+  const [audioLoaded, setAudioLoaded] = useState(false);
 
-  const audioRef = useRef(new Audio(total[0]?.track?.preview_url));
-
+  const audioSrc = total[currentIndex]?.track?.preview_url;
+  const audioRef = useRef(new Audio(audioSrc));
   const intervalRef = useRef();
 
-  const isReady = useRef(false);
-
   const { duration } = audioRef.current;
-
   const currentPercentage = duration ? (trackProgress / duration) * 100 : 0;
 
   const startTimer = () => {
@@ -36,58 +33,68 @@ export default function AudioPLayer({
     }, [1000]);
   };
 
-  useEffect(() => {
-    if (audioRef.current.src) {
-      if (isPlaying) {
-        audioRef.current.play();
-        startTimer();
-      } else {
-        clearInterval(intervalRef.current);
-        audioRef.current.pause();
-      }
+  const playAudio = () => {
+    audioRef.current.play().then(() => {
+      setIsPlaying(true);
+      startTimer();
+    });
+  };
+
+  const pauseAudio = () => {
+    audioRef.current.pause();
+    clearInterval(intervalRef.current);
+    setIsPlaying(false);
+  };
+
+  const togglePlayPause = () => {
+    if (isPlaying) {
+      pauseAudio();
     } else {
-      if (isPlaying) {
-        audioRef.current = new Audio(audioSrc);
-        audioRef.current.play();
-        startTimer();
-      } else {
-        clearInterval(intervalRef.current);
-        audioRef.current.pause();
+      if (audioLoaded) {
+        playAudio();
       }
     }
-  }, [isPlaying]);
+  };
 
   useEffect(() => {
     audioRef.current.pause();
     audioRef.current = new Audio(audioSrc);
+    setTrackProgress(0);
+    setAudioLoaded(false);
 
-    setTrackProgress(audioRef.current.currentTime);
+    audioRef.current.addEventListener("canplaythrough", () => {
+      setAudioLoaded(true);
+      if (isPlaying) {
+        playAudio();
+      }
+    });
 
-    if (isReady.current) {
-      audioRef.current.play();
-      setIsPlaying(true);
-      startTimer();
-    } else {
-      isReady.current = true;
-    }
+    return () => {
+      pauseAudio();
+      audioRef.current.removeEventListener("canplaythrough", () => {});
+    };
   }, [currentIndex]);
 
   useEffect(() => {
     return () => {
-      audioRef.current.pause();
-      clearInterval(intervalRef.current);
+      pauseAudio();
     };
   }, []);
 
   const handleNext = () => {
     if (currentIndex < total.length - 1) {
       setCurrentIndex(currentIndex + 1);
-    } else setCurrentIndex(0);
+    } else {
+      setCurrentIndex(0);
+    }
   };
 
   const handlePrev = () => {
-    if (currentIndex - 1 < 0) setCurrentIndex(total.length - 1);
-    else setCurrentIndex(currentIndex - 1);
+    if (currentIndex - 1 < 0) {
+      setCurrentIndex(total.length - 1);
+    } else {
+      setCurrentIndex(currentIndex - 1);
+    }
   };
 
   const addZero = (n) => {
@@ -103,7 +110,7 @@ export default function AudioPLayer({
       <div className="player-left-body">
         <ProgressCircle
           percentage={currentPercentage}
-          isPlaying={true}
+          isPlaying={isPlaying}
           image={currentTrack?.album?.images[0]?.url}
           size={400}
           color="rgb(69, 163, 170)"
@@ -120,7 +127,7 @@ export default function AudioPLayer({
           </div>
           <Controls
             isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
+            setIsPlaying={togglePlayPause}
             handleNext={handleNext}
             handlePrev={handlePrev}
             total={total}

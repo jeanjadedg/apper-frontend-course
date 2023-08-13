@@ -54,12 +54,12 @@ function InputWithApiCall() {
     setShouldSearch(true);
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const playPlaylist = (id) => {
-    const playlistType = 'album';
-    navigate("/player", { state: { id, type: playlistType, total: albums } });
-  }
+  // const playPlaylist = (id) => {
+  //   const playlistType = 'album';
+  //   navigate("/player", { state: { id, type: playlistType, total: albums } });
+  // }
 
   return (
     <div className="screen-container">
@@ -75,7 +75,8 @@ function InputWithApiCall() {
       </div>
       <div className='feed-body'>
         {albums.map((albumCard) => (
-          <div className='feed-album-card' key={albumCard.id} onClick={() => playPlaylist(albumCard.id)}>
+          // in the future, i want to make the player work by either getting a playlist or an album
+          <div className='feed-album-card' key={albumCard.id}>
             <img src={albumCard.images[0]?.url} className='feed-image' alt='Album-art' />
             <p className='feed-album-name'>{albumCard.name}</p>
             <p className='feed-album-subtitle'>{albumCard.total_tracks} songs</p>
