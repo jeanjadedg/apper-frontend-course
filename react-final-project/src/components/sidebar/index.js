@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './sidebar.css';
 import SidebarButton from './sidebarButton';
-import { MdFavorite, MdFeed } from 'react-icons/md';
-import { FaGripfire, FaPlay } from 'react-icons/fa';
+import { FaPlay } from 'react-icons/fa';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IoLibrary } from 'react-icons/io5';
-import { MdSpaceDashboard } from 'react-icons/md';
-import { CgGym } from "react-icons/cg";
+import { RiPlayListFill } from "react-icons/ri";
 import apiClient from '../../spotify';
 import { BsSearch } from 'react-icons/bs';
 import { FiTrendingUp } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 export default function Sidebar( {onSignout} ) {
   const [image, setImage] = useState(
@@ -37,7 +34,7 @@ export default function Sidebar( {onSignout} ) {
         <SidebarButton title='Search' to='/feed' icon={<BsSearch />} />
         <SidebarButton title='Featured' to='/trending' icon={<FiTrendingUp />} />
         <SidebarButton title='Player' to='/player' icon={<FaPlay />} />
-        <SidebarButton title='Workout' to='/favorites' icon={<CgGym />} />
+        <SidebarButton title='Playlists' to='/favorites' icon={<RiPlayListFill />} />
         <SidebarButton title='Library' to='/' icon={<IoLibrary />} />
       </div>
       <div className='signout-button' onClick={onSignout}>
